@@ -1,0 +1,131 @@
+--
+-- Author: David Macababayao
+--
+-- Host: 
+-- Database: airlineBooking
+-- Server version	
+-- ------------------------------------------------------
+
+/* Set database */
+DROP DATABASE IF EXISTS `airlineBooking`;
+CREATE DATABASE `airlineBooking`;
+USE `airlineBooking`;
+
+/* Drop existing tables */
+DROP TABLE IF EXISTS `flight_ticket`;
+DROP TABLE IF EXISTS `flight`;
+DROP TABLE IF EXISTS `airplane`;
+DROP TABLE IF EXISTS `pilot`;
+DROP TABLE IF EXISTS `admin`;
+DROP TABLE IF EXISTS `airport`;
+DROP TABLE IF EXISTS `client`;
+
+
+/* Airport */
+CREATE TABLE `airport` (
+  `airport_id` int NOT NULL AUTO_INCREMENT,
+  `airport_name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  PRIMARY KEY (`airport_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/* Admin */
+CREATE TABLE `admin` (
+  `admin_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `airport_id` int NOT NULL,
+  PRIMARY KEY (`admin_id`),
+  /*KEY `fk_admin_airport_idx` (`airport_id`),  Foreign Key */
+  CONSTRAINT `fk_admin_airport` FOREIGN KEY (`airport_id`) REFERENCES `airport` (`airport_id`) /* "fk_airport_id" is the name of the FK constraint */
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/* Pilot */
+CREATE TABLE `pilot` (
+  `pilot_id` int NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`pilot_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/* Airplane */
+CREATE TABLE `airplane` (
+  `airplane_id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) NOT NULL,
+  `pilot_id` int,
+  `airport_id` int NOT NULL,
+  `arrival_time` datetime DEFAULT NULL,
+  `departure_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`airplane_id`),
+  /*KEY `fk_airplane_pilot_idx` (`pilot_id`),
+  KEY `fk_airplane_airport_idx` (`airport_id`),*/
+  CONSTRAINT `fk_airplane_pilot` FOREIGN KEY (`pilot_id`) REFERENCES `pilot` (`pilot_id`),
+  CONSTRAINT `fk_airplane_airport` FOREIGN KEY (`airport_id`) REFERENCES `airport` (`airport_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/* Client */
+CREATE TABLE `client` (
+  `SIN` int unsigned NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `phone_number` varchar(45) DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`SIN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/* Flight */
+CREATE TABLE `flight` (
+  `flight_id` int NOT NULL AUTO_INCREMENT,
+  `arrival_time` datetime NOT NULL,
+  `arrival_airport` int NOT NULL,
+  `departure_time` datetime NOT NULL,
+  `departure_airport` int NOT NULL,
+  `pilot_id` int NOT NULL,
+  `airplane_id` int NOT NULL,
+  PRIMARY KEY (`flight_id`),
+  /*KEY `fk_flight_pilot_idx` (`pilot_id`),
+  KEY `fk_flight_departure_airport_idx` (`departure_airport`),
+  KEY `fk_flight_arrival_airport_idx` (`arrival_airport`),
+  KEY `fk_flight_ticket_airplane_idx` (`airplane_id`),*/
+  CONSTRAINT `fk_flight_pilot` FOREIGN KEY (`pilot_id`) REFERENCES `pilot` (`pilot_id`),
+  CONSTRAINT `fk_flight_departure_airport` FOREIGN KEY (`departure_airport`) REFERENCES `airport` (`airport_id`),
+  CONSTRAINT `fk_flight_arrival_airport` FOREIGN KEY (`arrival_airport`) REFERENCES `airport` (`airport_id`),
+  CONSTRAINT `fk_flight_airplane` FOREIGN KEY (`airplane_id`) REFERENCES `airplane` (`airplane_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/* Flight Ticket */
+CREATE TABLE `flight_ticket` (
+  `ticket_id` int NOT NULL AUTO_INCREMENT,
+  `seat_number` int NOT NULL UNIQUE,
+  `flight_id` int NOT NULL,
+  `SIN` int unsigned NOT NULL,
+  PRIMARY KEY (`ticket_id`),
+  /*KEY `fk_flight_ticket_flight_idx` (`flight_id`),
+  KEY `fk_flight_ticket_SIN_idx` (`SIN`),*/
+  CONSTRAINT `fk_flight_ticket_flight` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`flight_id`),
+  CONSTRAINT `fk_flight_ticket_client` FOREIGN KEY (`SIN`) REFERENCES `client` (`SIN`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+/* Add values */
+INSERT INTO client (SIN, first_name,last_name,address,phone_number,email) VALUES ("321125132", "Arthur", "James", "12323 Sesame st Calgary AB Canada", "4043024932", "arthurJames123@yahoo.com");
+INSERT INTO client (SIN, first_name,last_name,address,phone_number,email) VALUES ("321950697", "Eric", "Marks", "12323 53Ave Edmonton AB Canada", "4036235467", "EricMarks321@gmail.com");
+
+INSERT INTO pilot (first_name, last_name) VALUES ("David", "Maca");
+INSERT INTO pilot (first_name, last_name) VALUES ("James", "Franco");
+
+INSERT INTO airport (airport_name,address) VALUES ("Calgary Airport", "Calgary");
+INSERT INTO airport (airport_name,address) VALUES ("Edmonton Airport", "Edmonton");
+
+INSERT INTO airplane (type,pilot_id,airport_id,departure_time,arrival_time) VALUES ("Jet aircraft",1,2,"1987-06-11 03:04:12","1998-12-11 03:07:4");
+INSERT INTO airplane (type,pilot_id,airport_id,departure_time,arrival_time) VALUES ("Propeller aircraft",2,1,"1998-02-11 03:04:12","1998-02-12 04:01:11");
+
+INSERT INTO admin (username, password, airport_id) VALUES ("dmaca962", "mypassword1", 1);
+INSERT INTO admin (username, password, airport_id) VALUES ("jfranco531", "password123", 2);
+
+INSERT INTO flight (pilot_id,departure_airport,arrival_airport,departure_time,arrival_time, airplane_id) VALUES (1,2,1,"1998-02-11 03:04:12","1998-02-14 03:05:09",1);
+INSERT INTO flight (pilot_id,departure_airport,arrival_airport,departure_time,arrival_time, airplane_id) VALUES (2,1,2,"1996-03-10 03:04:12","1996-01-13 05:06:10",2);
+INSERT INTO flight (pilot_id,departure_airport,arrival_airport,departure_time,arrival_time, airplane_id) VALUES (1,2,1,"1998-02-11 03:04:14","1998-02-14 03:05:19",2);
+INSERT INTO flight (pilot_id,departure_airport,arrival_airport,departure_time,arrival_time, airplane_id) VALUES (2,1,2,"1996-03-10 03:04:14","1996-01-13 05:06:19",1);
+
