@@ -4,16 +4,14 @@ import Axios from "axios";
 
 export default function PilotPage() {
   return (
-    <div>
+    <div className="admin-container">
       <h1>Pilots</h1>
-      <div>
-        <Link to="/pilotList">
-          <button>All Pilots</button>
-        </Link>
-        <Link to="/pilotAdd">
-          <button>Add Pilot</button>
-        </Link>
-      </div>
+      <Link to="/pilotList">
+        <button className="btn btn-transparent btn-exLar">All Pilots</button>
+      </Link>
+      <Link to="/pilotAdd">
+        <button className="btn btn-transparent btn-exLar">Add Pilot</button>
+      </Link>
     </div>
   );
 }
@@ -48,7 +46,7 @@ export function List() {
       <h1>Pilots</h1>
       {list.map((val, key) => {
         return (
-          <div key={val.pilot_id} className="listInner">
+          <div key={val.pilot_id} className="listElem">
             <div>
               <h3>Pilot ID: {val.pilot_id}</h3>
               <h3>First Name: {val.first_name}</h3>
@@ -56,6 +54,7 @@ export function List() {
             </div>
             <div>
               <button
+                className="btn btn-transparent btn-med"
                 onClick={() => {
                   routeChange(val.pilot_id);
                 }}
@@ -63,6 +62,7 @@ export function List() {
                 Edit
               </button>
               <button
+                className="btn btn-transparent btn-med"
                 onClick={() => {
                   deletePilot(val.pilot_id);
                 }}
@@ -92,7 +92,7 @@ export function Add() {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h1>Add Pilot</h1>
       <label>First Name: </label>
       <input
@@ -108,7 +108,9 @@ export function Add() {
           setLastName(event.target.value);
         }}
       />
-      <button onClick={addPilot}>Add Pilot</button>
+      <button className="btn btn-opaque btn-med" onClick={addPilot}>
+        Add Pilot
+      </button>
     </div>
   );
 }

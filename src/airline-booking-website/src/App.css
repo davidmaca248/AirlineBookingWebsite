@@ -1,3 +1,135 @@
+/* home */
+.home-container {
+  background: url("https://ei.marketwatch.com/Multimedia/2019/02/25/Photos/ZH/MW-HE536_airpla_20190225131547_ZH.jpg?uuid=5fa81d1a-3929-11e9-9462-ac162d7bc1f7")
+    center center/cover no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+}
+.home-container > h1 {
+  color: #fff;
+  font-size: 100px;
+  margin-top: -100px;
+}
+
+.home-container > p {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 32px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.home-btns {
+  margin-top: 40px;
+}
+
+/* buttons */
+:root {
+  --primary: #fff;
+}
+.btn {
+  padding: 8px 20px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+.btn-opaque {
+  background-color: var(--primary);
+  color: #242424;
+  border: 1px solid var(--primary);
+}
+.btn-transparent {
+  background-color: transparent;
+  color: #fff;
+  padding: 8px 20px;
+  border: 1px solid var(--primary);
+  transition: all 0.3s ease-out;
+}
+.btn-med {
+  padding: 8px 20px;
+  font-size: 18px;
+}
+.btn-lar {
+  padding: 12px 26px;
+  font-size: 20px;
+}
+.btn-exLar {
+  padding: 20px 20px;
+  font-size: 30px;
+  width: 400px;
+}
+.btn-transparent:hover {
+  transition: all 0.3s ease-out;
+  background: #fff;
+  color: #242424;
+  transition: 250ms;
+}
+.btn-opaque:hover {
+  transition: all 0.3s ease-out;
+  background: transparent;
+  color: #242424;
+  transition: 250ms;
+}
+
+/* lists*/
+.list {
+  background: url("https://images.theconversation.com/files/282890/original/file-20190705-51268-lyvonz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=675.0&fit=crop")
+    center center/cover repeat;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.3);
+}
+.listElem {
+  width: auto;
+  height: auto;
+  border: 2px solid white;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+}
+
+/* Admin */
+.admin-container {
+  background: url("https://storage.kun.uz/source/3/tvuGyFiGU0LK4Tw2MHv6aQLecJkFcA24.jpg")
+    center center/cover no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+}
+
+/* .input {
+  width: auto;
+  height: auto;
+  border: 2px solid white;
+  margin: 10px;
+  display: flex;
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  color: black;
+} */
+
+/* general app */
 .App {
   text-align: center;
 }

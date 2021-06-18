@@ -4,16 +4,14 @@ import Axios from "axios";
 
 export default function AirplanePage() {
   return (
-    <div>
+    <div className="admin-container">
       <h1>Airplanes</h1>
-      <div>
-        <Link to="/airplaneList">
-          <button>All Airplanes</button>
-        </Link>
-        <Link to="/airplaneAdd">
-          <button>Add Airplane</button>
-        </Link>
-      </div>
+      <Link to="/airplaneList">
+        <button className="btn btn-transparent btn-exLar">All Airplanes</button>
+      </Link>
+      <Link to="/airplaneAdd">
+        <button className="btn btn-transparent btn-exLar">Add Airplane</button>
+      </Link>
     </div>
   );
 }
@@ -47,7 +45,7 @@ export function List() {
       <h1>Airplanes</h1>
       {list.map((val, key) => {
         return (
-          <div key={val.airplane_id} className="listInner">
+          <div key={val.airplane_id} className="listElem">
             <div>
               <h3>Airplane ID: {val.airplane_id}</h3>
               <h3>Airplane Type: {val.type}</h3>
@@ -58,6 +56,7 @@ export function List() {
             </div>
             <div>
               <button
+                className="btn btn-transparent btn-med"
                 onClick={() => {
                   routeChange(val.airplane_id);
                 }}
@@ -65,6 +64,7 @@ export function List() {
                 Edit
               </button>
               <button
+                className="btn btn-transparent btn-med"
                 onClick={() => {
                   deleteAirplane(val.airplane_id);
                 }}
@@ -100,7 +100,7 @@ export function Add() {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h1>Add Airplane</h1>
       <label>Airplane Type: </label>
       <input
@@ -137,7 +137,9 @@ export function Add() {
           setArrivalTime(event.target.value);
         }}
       />
-      <button onClick={addAirplane}>Add Airplane</button>
+      <button className="btn btn-opaque btn-med" onClick={addAirplane}>
+        Add Airplane
+      </button>
     </div>
   );
 }

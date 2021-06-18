@@ -31,7 +31,7 @@ export default function BookFlight() {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h1>Book Flight {id}</h1>
       <h3>Enter Information</h3>
       <label>SIN:</label>
@@ -83,7 +83,9 @@ export default function BookFlight() {
           setSeat(event.target.value);
         }}
       />
-      <button onClick={addBooking}>Book Flight</button>
+      <button className="btn btn-opaque btn-med" onClick={addBooking}>
+        Book Flight
+      </button>
     </div>
   );
 }

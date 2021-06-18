@@ -23,7 +23,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h1>Admin Login</h1>
       <input
         type="text"
@@ -39,7 +39,9 @@ export default function Login() {
           setPassword(event.target.value);
         }}
       />
-      <button onClick={login}>Login</button>
+      <button className="btn btn-opaque btn-med" onClick={login}>
+        Login
+      </button>
       <p>{loginMsg}</p>
     </div>
   );

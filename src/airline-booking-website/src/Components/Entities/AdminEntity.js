@@ -4,16 +4,14 @@ import Axios from "axios";
 
 export default function AdminPage() {
   return (
-    <div>
+    <div className="admin-container">
       <h1>Admins</h1>
-      <div>
-        <Link to="/adminList">
-          <button>All Admins</button>
-        </Link>
-        <Link to="/adminAdd">
-          <button>Add Admin</button>
-        </Link>
-      </div>
+      <Link to="/adminList">
+        <button className="btn btn-transparent btn-exLar">All Admins</button>
+      </Link>
+      <Link to="/adminAdd">
+        <button className="btn btn-transparent btn-exLar">Add Admin</button>
+      </Link>
     </div>
   );
 }
@@ -44,13 +42,13 @@ export function List() {
   };
 
   return (
-    <div className="lists">
+    <div className="list">
       <h1>Admins</h1>
       {list.map((val, key) => {
         // for every element in the adminList
         return (
           //print out (map) every admin in the page
-          <div>
+          <div className="listElem">
             <div>
               <h3>Admin ID: {val.admin_id}</h3>
               <h3>Username: {val.username}</h3>
@@ -58,6 +56,7 @@ export function List() {
             </div>
             <div>
               <button
+                className="btn btn-transparent btn-med"
                 onClick={() => {
                   routeChange(val.admin_id);
                 }}
@@ -65,6 +64,7 @@ export function List() {
                 Edit
               </button>
               <button
+                className="btn btn-transparent btn-med"
                 onClick={() => {
                   deleteAdmin(val.admin_id);
                 }}
@@ -96,7 +96,7 @@ export function Add() {
   };
 
   return (
-    <div>
+    <div className="admin-container">
       <h1>Add Admin</h1>
       <label>Username: </label>
       <input
@@ -119,7 +119,9 @@ export function Add() {
           setAirportID(event.target.value);
         }}
       />
-      <button onClick={addAdmin}>Add Admin</button>
+      <button className="btn btn-opaque btn-med" onClick={addAdmin}>
+        Add Admin
+      </button>
     </div>
   );
 }

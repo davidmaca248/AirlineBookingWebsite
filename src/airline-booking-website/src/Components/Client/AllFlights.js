@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, useParams, useHistory } from "react-router-dom";
 import Axios from "axios";
+import "../../App.css";
 
 export default function AllFlights() {
   const [list, setList] = useState([]);
@@ -21,7 +22,7 @@ export default function AllFlights() {
       <h1>Flights</h1>
       {list.map((val, key) => {
         return (
-          <div className="listInner">
+          <div className="listElem">
             <div>
               <h3>Flight ID: {val.flight_id}</h3>
               <h3>Airplane ID: {val.airplane_id}</h3>
@@ -33,6 +34,7 @@ export default function AllFlights() {
             </div>
             <div>
               <button
+                className="btn btn-transparent btn-lar"
                 onClick={() => {
                   routeChange(val.flight_id);
                 }}
