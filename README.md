@@ -9,7 +9,7 @@ React based Website administered as an Airline Booking Service Website through t
 
 ## Update
 
-**Version 1.0 is released**
+**Version 1.0 is soon to be released**
 
 ## Description
 
@@ -24,7 +24,7 @@ An Airline Booking service Website that allows for customers and users to book f
 
 ## Available downloads
 
-The [full jar file](https://github.com/davidmaca248/ShortestPathCalculator/releases/download/2.0/ShortestPathCalculator.jar) can be downloaded in the [Releases section](https://github.com/davidmaca248/ShortestPath/releases).
+The [full jar file]() can be downloaded in the [Releases section](https://github.com/davidmaca248/ShortestPath/releases).
 
 ## Dependencies
 
